@@ -89,7 +89,7 @@
             z-index: -1;
         }
 
-        /* Music Player Controls */
+        /* Music Player Controls - SIMPLIFIED */
         .music-player {
             position: fixed;
             bottom: 100px;
@@ -129,60 +129,6 @@
             box-shadow: 0 0 15px rgba(102, 102, 102, 0.5);
         }
 
-        .volume-control {
-            background: rgba(0, 20, 0, 0.9);
-            border: 2px solid var(--primary-color);
-            border-radius: 30px;
-            padding: 15px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-        }
-
-        .music-player:hover .volume-control,
-        .volume-control:hover {
-            display: flex;
-        }
-
-        .volume-slider {
-            width: 150px;
-            height: 8px;
-            -webkit-appearance: none;
-            background: rgba(0, 255, 0, 0.2);
-            border-radius: 4px;
-            outline: none;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--primary-color);
-        }
-
-        .volume-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 10px var(--primary-color);
-        }
-
-        .volume-value {
-            color: var(--primary-color);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            text-shadow: 0 0 5px var(--primary-color);
-        }
-
         .music-label {
             color: var(--primary-color);
             font-size: 12px;
@@ -190,6 +136,10 @@
             letter-spacing: 2px;
             font-family: 'Orbitron', sans-serif;
             margin-top: 5px;
+            background: rgba(0, 20, 0, 0.9);
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-color);
         }
 
         @keyframes pulse {
@@ -1284,12 +1234,9 @@
                 font-size: 20px;
             }
 
-            .volume-control {
-                padding: 10px;
-            }
-
-            .volume-slider {
-                width: 120px;
+            .music-label {
+                font-size: 10px;
+                padding: 4px 8px;
             }
         }
 
@@ -1331,6 +1278,10 @@
                 width: 45px;
                 height: 45px;
                 font-size: 18px;
+            }
+
+            .music-label {
+                font-size: 9px;
             }
         }
 
@@ -1376,8 +1327,8 @@
                 font-size: 16px;
             }
 
-            .volume-slider {
-                width: 100px;
+            .music-label {
+                font-size: 8px;
             }
         }
 
@@ -1529,21 +1480,17 @@
     </style>
 </head>
 <body>
-    <!-- Music Player -->
+    <!-- Music Player - SIMPLIFIED -->
     <div class="music-player">
-        <div class="volume-control" id="volumeControl">
-            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
-            <div class="volume-value" id="volumeValue">50%</div>
-            <div class="music-label">RUKI PROGRAMMER</div>
-        </div>
         <button class="music-toggle" id="musicToggle">
             <i class="fas fa-volume-up"></i>
         </button>
+        <div class="music-label" id="musicLabel">MUSIC ON</div>
     </div>
 
     <!-- Audio Element -->
     <audio id="backgroundMusic" loop>
-        <source src="bg.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -2275,36 +2222,24 @@
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // ==================== MUSIC PLAYER FUNCTIONALITY ====================
+        // ==================== SIMPLIFIED MUSIC PLAYER ====================
         const backgroundMusic = document.getElementById('backgroundMusic');
         const musicToggle = document.getElementById('musicToggle');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volumeValue = document.getElementById('volumeValue');
-        const volumeControl = document.getElementById('volumeControl');
+        const musicLabel = document.getElementById('musicLabel');
         const musicIcon = musicToggle.querySelector('i');
 
         // Initialize music settings from localStorage or default
         let isMuted = localStorage.getItem('musicMuted') === 'true';
-        let volume = localStorage.getItem('musicVolume') ? parseInt(localStorage.getItem('musicVolume')) : 50;
 
         // Set initial state
-        backgroundMusic.volume = volume / 100;
-        volumeSlider.value = volume;
-        volumeValue.textContent = volume + '%';
-
         if (isMuted) {
             backgroundMusic.muted = true;
             musicToggle.classList.add('muted');
             musicIcon.classList.remove('fa-volume-up');
             musicIcon.classList.add('fa-volume-mute');
+            musicLabel.textContent = 'MUSIC OFF';
         } else {
-            // Play music on page load (with user interaction requirement)
-            document.addEventListener('click', function initializeMusic() {
-                if (!backgroundMusic.played.length > 0) {
-                    backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
-                }
-                document.removeEventListener('click', initializeMusic);
-            });
+            musicLabel.textContent = 'MUSIC ON';
         }
 
         // Toggle mute/unmute
@@ -2316,10 +2251,12 @@
                 musicToggle.classList.add('muted');
                 musicIcon.classList.remove('fa-volume-up');
                 musicIcon.classList.add('fa-volume-mute');
+                musicLabel.textContent = 'MUSIC OFF';
             } else {
                 musicToggle.classList.remove('muted');
                 musicIcon.classList.remove('fa-volume-mute');
                 musicIcon.classList.add('fa-volume-up');
+                musicLabel.textContent = 'MUSIC ON';
                 // Ensure music plays when unmuted
                 if (backgroundMusic.paused) {
                     backgroundMusic.play().catch(e => console.log("Play prevented:", e));
@@ -2330,45 +2267,12 @@
             localStorage.setItem('musicMuted', isMuted);
         });
 
-        // Volume control
-        volumeSlider.addEventListener('input', function() {
-            volume = this.value;
-            backgroundMusic.volume = volume / 100;
-            volumeValue.textContent = volume + '%';
-            
-            // Save to localStorage
-            localStorage.setItem('musicVolume', volume);
-            
-            // If volume is 0, show muted icon
-            if (volume == 0 && !isMuted) {
-                backgroundMusic.muted = true;
-                musicToggle.classList.add('muted');
-                musicIcon.classList.remove('fa-volume-up');
-                musicIcon.classList.add('fa-volume-mute');
-                isMuted = true;
-                localStorage.setItem('musicMuted', true);
-            } else if (volume > 0 && isMuted) {
-                backgroundMusic.muted = false;
-                musicToggle.classList.remove('muted');
-                musicIcon.classList.remove('fa-volume-mute');
-                musicIcon.classList.add('fa-volume-up');
-                isMuted = false;
-                localStorage.setItem('musicMuted', false);
+        // Auto play music when page loads (with user interaction requirement)
+        document.addEventListener('click', function initializeMusic() {
+            if (!backgroundMusic.played.length > 0 && !isMuted) {
+                backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
             }
-        });
-
-        // Show volume control on hover
-        musicToggle.addEventListener('mouseenter', function() {
-            volumeControl.style.display = 'flex';
-        });
-
-        volumeControl.addEventListener('mouseleave', function() {
-            volumeControl.style.display = 'none';
-        });
-
-        // Keep volume control visible when interacting with it
-        volumeControl.addEventListener('mouseenter', function() {
-            this.style.display = 'flex';
+            document.removeEventListener('click', initializeMusic);
         });
 
         // ==================== MATRIX BACKGROUND ====================
