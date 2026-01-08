@@ -165,10 +165,34 @@
             50% { transform: scale(1.1); }
         }
 
+        /* Mobile Menu Toggle Button */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 2.5rem;
+            margin: 0;
+            padding: 0;
         }
 
         nav a {
@@ -349,6 +373,7 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(5px);
+            cursor: pointer;
         }
 
         .course-card:hover {
@@ -382,6 +407,31 @@
             font-size: 0.9rem;
             margin-top: 15px;
             border: 1px solid var(--primary-color);
+        }
+
+        /* Order Now Button */
+        .order-now-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .order-now-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.4);
         }
 
         /* Services Section - Course Services */
@@ -504,6 +554,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
+            cursor: pointer;
         }
 
         .boost-card:hover {
@@ -1051,17 +1102,53 @@
             transform: translateY(-5px);
         }
 
-        /* Responsive Design */
+        /* Responsive Design - Mobile Menu */
         @media (max-width: 992px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1.5rem;
+            .mobile-menu-toggle {
+                display: flex;
             }
 
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: rgba(0, 15, 0, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 100px;
                 gap: 1.5rem;
+                transition: right 0.5s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+                border-left: 3px solid var(--primary-color);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li {
+                width: 80%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                padding: 15px;
+                width: 100%;
+                font-size: 1.2rem;
+                border: 1px solid rgba(0, 255, 0, 0.2);
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .logo h1 {
+                font-size: 1.8rem;
             }
 
             .hero h2 {
@@ -1110,6 +1197,183 @@
                 justify-content: center;
             }
         }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo-icon {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-numbers {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-number {
+                min-width: 100%;
+            }
+        }
+
+        /* Modal for Course Details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent-color);
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-description {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .modal-features {
+            margin-bottom: 2rem;
+        }
+
+        .modal-features h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .modal-features li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .modal-features li:before {
+            content: '✓';
+            color: var(--primary-color);
+            position: absolute;
+            left: -1.5rem;
+            font-weight: bold;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+            text-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .modal-order-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+        }
+
+        .modal-order-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+        }
+
+        /* WhatsApp Order Button Styling */
+        .whatsapp-order-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .whatsapp-order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -1129,8 +1393,14 @@
                 </div>
                 <h1>RUKI PROGRAMMER</h1>
             </div>
+            
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
             <nav>
-                <ul>
+                <ul id="navMenu">
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
                     <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
@@ -1192,68 +1462,334 @@
         </div>
     </section>
 
-    <!-- NEW: Social Media Boost Section -->
-    <section class="boost-section" id="boost">
+    <!-- Social Media Boost Section -->
+    <section class="boost-section section-border" id="boost">
         <div class="container">
             <h2 class="section-title">Social Media Boost Services</h2>
-            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Boost your social media presence instantly! Get real followers, likes, views, and engagement across all major platforms.
-            </p>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Boost your social media presence with real, active followers, likes, and views. Instant delivery guaranteed!</p>
             
+            <div class="boost-tabs">
+                <div class="boost-tab active" data-tab="facebook">
+                    <i class="fab fa-facebook"></i> Facebook
+                </div>
+                <div class="boost-tab" data-tab="instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                </div>
+                <div class="boost-tab" data-tab="tiktok">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </div>
+                <div class="boost-tab" data-tab="youtube">
+                    <i class="fab fa-youtube"></i> YouTube
+                </div>
+                <div class="boost-tab" data-tab="recovery">
+                    <i class="fas fa-user-shield"></i> Account Recovery
+                </div>
+            </div>
 
-            <!-- Account Recovery Content -->
-            <div class="boost-content" id="recovery-content">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--accent-color);">
-                    <i class="fas fa-user-shield"></i> Account Recovery Services
-                </h3>
+            <!-- Facebook Boost Content -->
+            <div id="facebook-content" class="boost-content active">
                 <div class="boost-grid">
-                    <div class="boost-card">
+                    <div class="boost-card" data-service="Facebook Followers">
                         <div class="boost-header">
                             <div class="boost-icon">
-                                <i class="fas fa-key"></i>
+                                <i class="fas fa-users"></i>
                             </div>
-                            <h3 class="boost-title">Account Recovery & Hacking</h3>
+                            <h3 class="boost-title">Facebook Followers</h3>
                         </div>
-                        <p class="boost-description">Professional account recovery and security services for all social media platforms.</p>
+                        <p class="boost-description">Real and active Facebook followers to grow your page presence</p>
                         <ul class="boost-packages">
-                            <li><i class="fas fa-check"></i> Account Recovery Services</li>
-                            <li><i class="fas fa-check"></i> Hacked Account Recovery</li>
-                            <li><i class="fas fa-check"></i> Security Bypass Services</li>
-                            <li><i class="fas fa-check"></i> Banned Account Unbanning</li>
-                            <li><i class="fas fa-check"></i> Profile Protection Setup</li>
+                            <li><i class="fas fa-check"></i> 1000 Followers - Rs. 1000</li>
+                            <li><i class="fas fa-check"></i> 5000 Followers - Rs. 4000</li>
+                            <li><i class="fas fa-check"></i> 10000 Followers - Rs. 7000</li>
+                            <li><i class="fas fa-check"></i> 50000 Followers - Rs. 30000</li>
                         </ul>
-                        <div class="boost-price">Contact for Price</div>
-                        <button class="boost-btn" data-service="Account Recovery">
-                            <i class="fab fa-whatsapp"></i> Contact Now
-                        </button>
+                        <div class="boost-price">From Rs. 1000</div>
+                        <button class="boost-btn" data-service="Facebook Followers">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="Facebook Likes">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <h3 class="boost-title">Facebook Likes</h3>
+                        </div>
+                        <p class="boost-description">Instant likes for your Facebook posts and pages</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Likes - Rs. 800</li>
+                            <li><i class="fas fa-check"></i> 5000 Likes - Rs. 3500</li>
+                            <li><i class="fas fa-check"></i> 10000 Likes - Rs. 6000</li>
+                            <li><i class="fas fa-check"></i> 50000 Likes - Rs. 25000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 800</div>
+                        <button class="boost-btn" data-service="Facebook Likes">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="Facebook Video Views">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h3 class="boost-title">Facebook Video Views</h3>
+                        </div>
+                        <p class="boost-description">Increase video views for Facebook videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Views - Rs. 500</li>
+                            <li><i class="fas fa-check"></i> 10000 Views - Rs. 4000</li>
+                            <li><i class="fas fa-check"></i> 50000 Views - Rs. 15000</li>
+                            <li><i class="fas fa-check"></i> 100000 Views - Rs. 25000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 500</div>
+                        <button class="boost-btn" data-service="Facebook Video Views">Order Now</button>
                     </div>
                 </div>
             </div>
-            
-     
-            
-            <!-- WhatsApp Contact -->
-            <div class="whatsapp-info" style="margin-top: 4rem;">
-                <h4><i class="fas fa-bolt"></i> Need Custom Boost Package?</h4>
-                <p>Contact us on WhatsApp for customized social media boost packages tailored to your needs.</p>
-                
-                <div class="contact-numbers">
-                    <div class="contact-number">
-                        <h4><i class="fab fa-whatsapp"></i> WhatsApp 1</h4>
-                        <div class="whatsapp-number">+94 71 932 0832</div>
+
+            <!-- Instagram Boost Content -->
+            <div id="instagram-content" class="boost-content">
+                <div class="boost-grid">
+                    <div class="boost-card" data-service="Instagram Followers">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="boost-title">Instagram Followers</h3>
+                        </div>
+                        <p class="boost-description">Real Instagram followers with profile pictures</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Followers - Rs. 1200</li>
+                            <li><i class="fas fa-check"></i> 5000 Followers - Rs. 5000</li>
+                            <li><i class="fas fa-check"></i> 10000 Followers - Rs. 8000</li>
+                            <li><i class="fas fa-check"></i> 50000 Followers - Rs. 35000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1200</div>
+                        <button class="boost-btn" data-service="Instagram Followers">Order Now</button>
                     </div>
-                    <div class="contact-number">
-                        <h4><i class="fab fa-whatsapp"></i> WhatsApp 2</h4>
-                        <div class="whatsapp-number">+94 76 420 7978</div>
+
+                    <div class="boost-card" data-service="Instagram Likes">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="boost-title">Instagram Likes</h3>
+                        </div>
+                        <p class="boost-description">High-quality likes for Instagram posts</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Likes - Rs. 1000</li>
+                            <li><i class="fas fa-check"></i> 5000 Likes - Rs. 4000</li>
+                            <li><i class="fas fa-check"></i> 10000 Likes - Rs. 7000</li>
+                            <li><i class="fas fa-check"></i> 50000 Likes - Rs. 30000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1000</div>
+                        <button class="boost-btn" data-service="Instagram Likes">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="Instagram Views">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="boost-title">Instagram Views</h3>
+                        </div>
+                        <p class="boost-description">Boost views for Instagram Reels and Videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Views - Rs. 600</li>
+                            <li><i class="fas fa-check"></i> 10000 Views - Rs. 5000</li>
+                            <li><i class="fas fa-check"></i> 50000 Views - Rs. 20000</li>
+                            <li><i class="fas fa-check"></i> 100000 Views - Rs. 35000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 600</div>
+                        <button class="boost-btn" data-service="Instagram Views">Order Now</button>
                     </div>
                 </div>
-                
-                <a href="https://wa.me/94719320832?text=Hi!%20I'm%20interested%20in%20Social%20Media%20Boost%20services" 
-                   target="_blank" 
-                   class="boost-btn" 
-                   style="margin-top: 1.5rem; width: auto; display: inline-block; padding: 12px 30px;">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Now
-                </a>
+            </div>
+
+            <!-- TikTok Boost Content -->
+            <div id="tiktok-content" class="boost-content">
+                <div class="boost-grid">
+                    <div class="boost-card" data-service="TikTok Followers">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="boost-title">TikTok Followers</h3>
+                        </div>
+                        <p class="boost-description">Real TikTok followers for your profile</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Followers - Rs. 1500</li>
+                            <li><i class="fas fa-check"></i> 5000 Followers - Rs. 6000</li>
+                            <li><i class="fas fa-check"></i> 10000 Followers - Rs. 10000</li>
+                            <li><i class="fas fa-check"></i> 50000 Followers - Rs. 40000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1500</div>
+                        <button class="boost-btn" data-service="TikTok Followers">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="TikTok Likes">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="boost-title">TikTok Likes</h3>
+                        </div>
+                        <p class="boost-description">Increase likes on TikTok videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Likes - Rs. 1200</li>
+                            <li><i class="fas fa-check"></i> 5000 Likes - Rs. 5000</li>
+                            <li><i class="fas fa-check"></i> 10000 Likes - Rs. 8000</li>
+                            <li><i class="fas fa-check"></i> 50000 Likes - Rs. 35000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1200</div>
+                        <button class="boost-btn" data-service="TikTok Likes">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="TikTok Views">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="boost-title">TikTok Views</h3>
+                        </div>
+                        <p class="boost-description">Boost views for TikTok videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Views - Rs. 800</li>
+                            <li><i class="fas fa-check"></i> 10000 Views - Rs. 6000</li>
+                            <li><i class="fas fa-check"></i> 50000 Views - Rs. 25000</li>
+                            <li><i class="fas fa-check"></i> 100000 Views - Rs. 45000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 800</div>
+                        <button class="boost-btn" data-service="TikTok Views">Order Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube Boost Content -->
+            <div id="youtube-content" class="boost-content">
+                <div class="boost-grid">
+                    <div class="boost-card" data-service="YouTube Subscribers">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="boost-title">YouTube Subscribers</h3>
+                        </div>
+                        <p class="boost-description">Real YouTube subscribers for your channel</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Subscribers - Rs. 3000</li>
+                            <li><i class="fas fa-check"></i> 5000 Subscribers - Rs. 12000</li>
+                            <li><i class="fas fa-check"></i> 10000 Subscribers - Rs. 20000</li>
+                            <li><i class="fas fa-check"></i> 50000 Subscribers - Rs. 80000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 3000</div>
+                        <button class="boost-btn" data-service="YouTube Subscribers">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="YouTube Views">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="boost-title">YouTube Views</h3>
+                        </div>
+                        <p class="boost-description">Increase views on YouTube videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Views - Rs. 1000</li>
+                            <li><i class="fas fa-check"></i> 10000 Views - Rs. 8000</li>
+                            <li><i class="fas fa-check"></i> 50000 Views - Rs. 35000</li>
+                            <li><i class="fas fa-check"></i> 100000 Views - Rs. 60000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1000</div>
+                        <button class="boost-btn" data-service="YouTube Views">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="YouTube Likes">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <h3 class="boost-title">YouTube Likes</h3>
+                        </div>
+                        <p class="boost-description">More likes for your YouTube videos</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> 1000 Likes - Rs. 1500</li>
+                            <li><i class="fas fa-check"></i> 5000 Likes - Rs. 6000</li>
+                            <li><i class="fas fa-check"></i> 10000 Likes - Rs. 10000</li>
+                            <li><i class="fas fa-check"></i> 50000 Likes - Rs. 40000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 1500</div>
+                        <button class="boost-btn" data-service="YouTube Likes">Order Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Recovery Content -->
+            <div id="recovery-content" class="boost-content">
+                <div class="boost-grid">
+                    <div class="boost-card" data-service="Facebook Account Recovery">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fab fa-facebook"></i>
+                            </div>
+                            <h3 class="boost-title">Facebook Account Recovery</h3>
+                        </div>
+                        <p class="boost-description">Recover hacked or disabled Facebook accounts</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> Basic Recovery - Rs. 5000</li>
+                            <li><i class="fas fa-check"></i> Full Recovery with Backup - Rs. 10000</li>
+                            <li><i class="fas fa-check"></i> Business Account Recovery - Rs. 15000</li>
+                            <li><i class="fas fa-check"></i> Urgent Recovery (24 hours) - Rs. 20000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 5000</div>
+                        <button class="boost-btn" data-service="Facebook Account Recovery">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="Instagram Account Recovery">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <h3 class="boost-title">Instagram Account Recovery</h3>
+                        </div>
+                        <p class="boost-description">Recover hacked or disabled Instagram accounts</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> Basic Recovery - Rs. 4000</li>
+                            <li><i class="fas fa-check"></i> Full Recovery with Backup - Rs. 8000</li>
+                            <li><i class="fas fa-check"></i> Business Account Recovery - Rs. 12000</li>
+                            <li><i class="fas fa-check"></i> Urgent Recovery (24 hours) - Rs. 15000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 4000</div>
+                        <button class="boost-btn" data-service="Instagram Account Recovery">Order Now</button>
+                    </div>
+
+                    <div class="boost-card" data-service="WhatsApp Account Recovery">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3 class="boost-title">WhatsApp Account Recovery</h3>
+                        </div>
+                        <p class="boost-description">Recover lost WhatsApp accounts and chats</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> Basic Recovery - Rs. 3000</li>
+                            <li><i class="fas fa-check"></i> Full Recovery with Chats - Rs. 6000</li>
+                            <li><i class="fas fa-check"></i> Business Account Recovery - Rs. 10000</li>
+                            <li><i class="fas fa-check"></i> Urgent Recovery (24 hours) - Rs. 12000</li>
+                        </ul>
+                        <div class="boost-price">From Rs. 3000</div>
+                        <button class="boost-btn" data-service="WhatsApp Account Recovery">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boost Images Gallery Section -->
+    <section class="boost-section" id="boost-gallery">
+        <div class="container">
+            <h2 class="section-title">Our Boost Results</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">See the amazing results our clients have achieved with our social media boost services</p>
+            <div class="boost-images-gallery">
+                <!-- Boost images will be generated by JavaScript -->
             </div>
         </div>
     </section>
@@ -1532,6 +2068,35 @@
         </div>
     </footer>
 
+    <!-- Modal for Course Details -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 class="modal-title" id="modalCourseTitle"></h2>
+            <p class="modal-description" id="modalCourseDescription"></p>
+            
+            <div class="modal-features">
+                <h4><i class="fas fa-star"></i> What You'll Learn:</h4>
+                <ul id="modalCourseFeatures"></ul>
+            </div>
+            
+            <div class="modal-features">
+                <h4><i class="fas fa-cogs"></i> Course Includes:</h4>
+                <ul id="modalCourseIncludes"></ul>
+            </div>
+            
+            <div class="modal-price" id="modalCoursePrice"></div>
+            
+            <button class="modal-order-btn" id="modalOrderBtn">
+                <i class="fab fa-whatsapp"></i> Order This Course Now
+            </button>
+            
+            <p style="text-align: center; margin-top: 1rem; color: #b0b0b0;">
+                Click to send WhatsApp message with course details
+            </p>
+        </div>
+    </div>
+
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-chevron-up"></i>
@@ -1691,19 +2256,261 @@
 
         // Courses Data (for courses section)
         const courses = [
-            { title: "DARK WEB, KALI LINUX, TERMUX LEARNING", icon: "fas fa-user-secret", level: "Beginner" },
-            { title: "COMPUTER HACKING, MOBILE HACKING", icon: "fas fa-laptop", level: "Intermediate" },
-            { title: "ANDROID HACKING, WIFI HACKING COURSES", icon: "fas fa-wifi", level: "Intermediate" },
-            { title: "SOCIAL MEDIA HACKING", icon: "fas fa-share-alt", level: "Intermediate" },
-            { title: "FACEBOOK, WHATSAPP HACKING", icon: "fab fa-facebook", level: "Advanced" },
-            { title: "INSTAGRAM, TWITTER HACKING", icon: "fab fa-instagram", level: "Advanced" },
-            { title: "PASSWORD CRACKING METHODS", icon: "fas fa-key", level: "Intermediate" },
-            { title: "CARDING COMPLETE COURSE", icon: "fas fa-credit-card", level: "Advanced" },
-            { title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", icon: "fas fa-globe", level: "Advanced" },
-            { title: "BECOME A COMPLETE EXPERT HACKER", icon: "fas fa-graduation-cap", level: "All Levels" }
+            { 
+                title: "DARK WEB, KALI LINUX, TERMUX LEARNING", 
+                icon: "fas fa-user-secret", 
+                level: "Beginner",
+                description: "Complete course on Dark Web navigation, Kali Linux tools, and Termux mobile hacking platform. Learn to access the dark web safely, use Kali Linux penetration testing tools, and master Termux for mobile hacking.",
+                price: "Rs. 5000",
+                features: [
+                    "Dark Web basics and safety protocols",
+                    "Kali Linux installation and setup",
+                    "Essential Kali Linux tools overview",
+                    "Termux installation and configuration",
+                    "Mobile hacking with Termux",
+                    "Anonymity and privacy techniques"
+                ],
+                includes: [
+                    "30+ hours of video content",
+                    "Practical exercises and labs",
+                    "Downloadable resources",
+                    "Lifetime access",
+                    "Certificate of completion"
+                ]
+            },
+            { 
+                title: "COMPUTER HACKING, MOBILE HACKING", 
+                icon: "fas fa-laptop", 
+                level: "Intermediate",
+                description: "Master computer and mobile device penetration testing. Learn system vulnerabilities, exploitation techniques, and security assessment methodologies for both computers and mobile devices.",
+                price: "Rs. 6000",
+                features: [
+                    "Computer system vulnerabilities",
+                    "Mobile device security assessment",
+                    "Exploitation frameworks",
+                    "Network penetration testing",
+                    "Reverse engineering basics",
+                    "Malware analysis fundamentals"
+                ],
+                includes: [
+                    "40+ hours of video content",
+                    "Real-world case studies",
+                    "Hands-on labs",
+                    "Tools and scripts",
+                    "Community access"
+                ]
+            },
+            { 
+                title: "ANDROID HACKING, WIFI HACKING COURSES", 
+                icon: "fas fa-wifi", 
+                level: "Intermediate",
+                description: "Specialized course focusing on Android application security and wireless network penetration testing. Learn to test Android apps and secure wireless networks.",
+                price: "Rs. 5500",
+                features: [
+                    "Android application security testing",
+                    "WiFi network penetration",
+                    "Wireless security protocols",
+                    "Man-in-the-middle attacks",
+                    "Password cracking techniques",
+                    "Network sniffing and analysis"
+                ],
+                includes: [
+                    "35+ hours of video content",
+                    "Practical WiFi hacking labs",
+                    "Android testing environments",
+                    "Security tools collection",
+                    "Expert support"
+                ]
+            },
+            { 
+                title: "SOCIAL MEDIA HACKING", 
+                icon: "fas fa-share-alt", 
+                level: "Intermediate",
+                description: "Learn ethical hacking techniques for social media platforms. Understand security vulnerabilities and protection methods for popular social networks.",
+                price: "Rs. 4500",
+                features: [
+                    "Social media platform vulnerabilities",
+                    "Account security assessment",
+                    "Social engineering techniques",
+                    "Password recovery methods",
+                    "Privacy protection strategies",
+                    "Two-factor authentication bypass"
+                ],
+                includes: [
+                    "25+ hours of video content",
+                    "Case studies and examples",
+                    "Security assessment tools",
+                    "Protection guidelines",
+                    "Regular updates"
+                ]
+            },
+            { 
+                title: "FACEBOOK, WHATSAPP HACKING", 
+                icon: "fab fa-facebook", 
+                level: "Advanced",
+                description: "Advanced security testing course for Facebook and WhatsApp platforms. Learn ethical hacking methodologies for these popular messaging and social platforms.",
+                price: "Rs. 7000",
+                features: [
+                    "Facebook security vulnerabilities",
+                    "WhatsApp encryption analysis",
+                    "Account penetration testing",
+                    "Message interception techniques",
+                    "Privacy bypass methods",
+                    "Security best practices"
+                ],
+                includes: [
+                    "45+ hours of video content",
+                    "Advanced penetration labs",
+                    "Encryption analysis tools",
+                    "Expert mentorship",
+                    "Certificate of expertise"
+                ]
+            },
+            { 
+                title: "INSTAGRAM, TWITTER HACKING", 
+                icon: "fab fa-instagram", 
+                level: "Advanced",
+                description: "Comprehensive security testing course for Instagram and Twitter. Learn to identify and exploit vulnerabilities in these social media giants.",
+                price: "Rs. 6500",
+                features: [
+                    "Instagram security assessment",
+                    "Twitter API vulnerabilities",
+                    "Account takeover techniques",
+                    "Data extraction methods",
+                    "Privacy protection bypass",
+                    "Automated testing tools"
+                ],
+                includes: [
+                    "40+ hours of video content",
+                    "Real platform testing",
+                    "Custom testing tools",
+                    "API security analysis",
+                    "Community forum access"
+                ]
+            },
+            { 
+                title: "PASSWORD CRACKING METHODS", 
+                icon: "fas fa-key", 
+                level: "Intermediate",
+                description: "Master the art of password cracking using various techniques and tools. Learn both offensive and defensive password security strategies.",
+                price: "Rs. 4000",
+                features: [
+                    "Password hash analysis",
+                    "Brute force techniques",
+                    "Dictionary attacks",
+                    "Rainbow table usage",
+                    "Password policy analysis",
+                    "Security countermeasures"
+                ],
+                includes: [
+                    "30+ hours of video content",
+                    "Password cracking tools",
+                    "Custom wordlists",
+                    "Hash databases",
+                    "Practical exercises"
+                ]
+            },
+            { 
+                title: "CARDING COMPLETE COURSE", 
+                icon: "fas fa-credit-card", 
+                level: "Advanced",
+                description: "Understand carding techniques for security professionals. Learn to protect against financial fraud and understand payment system vulnerabilities.",
+                price: "Rs. 8000",
+                features: [
+                    "Payment system vulnerabilities",
+                    "Credit card fraud prevention",
+                    "Transaction security analysis",
+                    "Fraud detection methods",
+                    "Legal and ethical considerations",
+                    "Security compliance standards"
+                ],
+                includes: [
+                    "50+ hours of video content",
+                    "Case studies and examples",
+                    "Security assessment frameworks",
+                    "Compliance guidelines",
+                    "Expert certification"
+                ]
+            },
+            { 
+                title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", 
+                icon: "fas fa-globe", 
+                level: "Advanced",
+                description: "Comprehensive course covering both web application security testing and wireless network penetration methodologies.",
+                price: "Rs. 7500",
+                features: [
+                    "Web application vulnerabilities",
+                    "SQL injection techniques",
+                    "Cross-site scripting (XSS)",
+                    "Wireless network security",
+                    "Router penetration testing",
+                    "Security assessment frameworks"
+                ],
+                includes: [
+                    "55+ hours of video content",
+                    "Web app testing labs",
+                    "Wireless hacking tools",
+                    "Real-world scenarios",
+                    "Professional certification"
+                ]
+            },
+            { 
+                title: "BECOME A COMPLETE EXPERT HACKER", 
+                icon: "fas fa-graduation-cap", 
+                level: "All Levels",
+                description: "The ultimate comprehensive course covering all aspects of ethical hacking and cybersecurity. From beginner to expert level training.",
+                price: "Rs. 15000",
+                features: [
+                    "Complete ethical hacking curriculum",
+                    "All penetration testing methodologies",
+                    "Advanced exploitation techniques",
+                    "Network security assessment",
+                    "Mobile and web application testing",
+                    "Career guidance and certification"
+                ],
+                includes: [
+                    "200+ hours of video content",
+                    "All previous courses included",
+                    "One-on-one mentorship",
+                    "Certification exam",
+                    "Job placement assistance"
+                ]
+            }
         ];
 
-       
+        // Boost Images Data
+        const boostImages = [
+            {
+                src: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+                title: "Facebook Growth Results",
+                description: "Client achieved 10,000+ followers in 7 days"
+            },
+            {
+                src: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+                title: "Instagram Success Story",
+                description: "500% increase in engagement rates"
+            },
+            {
+                src: "https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+                title: "TikTok Viral Growth",
+                description: "1M+ views within 24 hours"
+            },
+            {
+                src: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+                title: "YouTube Channel Boost",
+                description: "From 100 to 10,000 subscribers in 30 days"
+            },
+            {
+                src: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+                title: "Account Recovery Success",
+                description: "100% success rate for hacked account recovery"
+            },
+            {
+                src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+                title: "Business Profile Growth",
+                description: "Local business increased sales by 300%"
+            }
+        ];
 
         // Social Media Links
         const socialLinks = [
@@ -1730,13 +2537,17 @@
 
         // Generate Course Cards (for courses section)
         const coursesGrid = document.querySelector('.courses-grid');
-        courses.forEach(course => {
+        courses.forEach((course, index) => {
             const courseCard = document.createElement('div');
             courseCard.className = 'course-card';
+            courseCard.setAttribute('data-course-index', index);
             courseCard.innerHTML = `
                 <h3><i class="${course.icon} course-icon"></i> ${course.title}</h3>
-                <p>Complete course with practical examples, tools, and real-world scenarios. Step-by-step guidance for mastering this skill.</p>
+                <p>${course.description.substring(0, 120)}...</p>
                 <span class="course-level">${course.level}</span>
+                <button class="order-now-btn" data-course-index="${index}">
+                    <i class="fas fa-shopping-cart"></i> Order Now - ${course.price}
+                </button>
             `;
             coursesGrid.appendChild(courseCard);
         });
@@ -1782,6 +2593,43 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            // Change icon
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
         // Boost Tabs Functionality
         const boostTabs = document.querySelectorAll('.boost-tab');
         const boostContents = document.querySelectorAll('.boost-content');
@@ -1800,6 +2648,118 @@
                 // Show selected content
                 document.getElementById(`${tabId}-content`).classList.add('active');
             });
+        });
+
+        // Course Card Click Event (Open Modal)
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't open modal if clicking the order button
+                if (e.target.classList.contains('order-now-btn') || 
+                    e.target.closest('.order-now-btn')) {
+                    return;
+                }
+                
+                const courseIndex = this.getAttribute('data-course-index');
+                openCourseModal(courseIndex);
+            });
+        });
+
+        // Order Now Button Click Event
+        document.querySelectorAll('.order-now-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering card click
+                const courseIndex = this.getAttribute('data-course-index');
+                openCourseModal(courseIndex);
+            });
+        });
+
+        // Function to open course modal
+        function openCourseModal(index) {
+            const course = courses[index];
+            const modal = document.getElementById('courseModal');
+            const modalTitle = document.getElementById('modalCourseTitle');
+            const modalDescription = document.getElementById('modalCourseDescription');
+            const modalFeatures = document.getElementById('modalCourseFeatures');
+            const modalIncludes = document.getElementById('modalCourseIncludes');
+            const modalPrice = document.getElementById('modalCoursePrice');
+            const modalOrderBtn = document.getElementById('modalOrderBtn');
+            
+            // Set modal content
+            modalTitle.textContent = course.title;
+            modalDescription.textContent = course.description;
+            modalPrice.textContent = course.price;
+            
+            // Clear previous features
+            modalFeatures.innerHTML = '';
+            modalIncludes.innerHTML = '';
+            
+            // Add features
+            course.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                modalFeatures.appendChild(li);
+            });
+            
+            // Add includes
+            course.includes.forEach(include => {
+                const li = document.createElement('li');
+                li.textContent = include;
+                modalIncludes.appendChild(li);
+            });
+            
+            // Set order button data
+            modalOrderBtn.setAttribute('data-course-title', course.title);
+            modalOrderBtn.setAttribute('data-course-price', course.price);
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal when clicking close button
+        document.getElementById('modalClose').addEventListener('click', function() {
+            const modal = document.getElementById('courseModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('courseModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Modal Order Button Click Event
+        document.getElementById('modalOrderBtn').addEventListener('click', function() {
+            const courseTitle = this.getAttribute('data-course-title');
+            const coursePrice = this.getAttribute('data-course-price');
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*Course Order - Ruki Programmer*%0A%0A` +
+                                   `📚 *Course:* ${courseTitle}%0A` +
+                                   `💰 *Price:* ${coursePrice}%0A` +
+                                   `💬 *Message:* I want to order the "${courseTitle}" course. Please send me payment details and course access information.%0A%0A` +
+                                   `> Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = "94719320832";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Close modal
+            const modal = document.getElementById('courseModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Show success message
+            alert(`Opening WhatsApp to order "${courseTitle}". Please complete the order process by sending the message.`);
         });
 
         // Social Media Boost Order Buttons
