@@ -89,6 +89,115 @@
             z-index: -1;
         }
 
+        /* Music Player Controls */
+        .music-player {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: 3px solid var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.7);
+        }
+
+        .music-toggle.muted {
+            background: linear-gradient(45deg, #666, #999);
+            border-color: #666;
+            box-shadow: 0 0 15px rgba(102, 102, 102, 0.5);
+        }
+
+        .volume-control {
+            background: rgba(0, 20, 0, 0.9);
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .music-player:hover .volume-control,
+        .volume-control:hover {
+            display: flex;
+        }
+
+        .volume-slider {
+            width: 150px;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(0, 255, 0, 0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .volume-value {
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            text-shadow: 0 0 5px var(--primary-color);
+        }
+
+        .music-label {
+            color: var(--primary-color);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 5px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         /* Header with Background Image */
         header {
             background: 
@@ -158,11 +267,6 @@
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
 
         /* Mobile Menu Toggle Button */
@@ -1167,6 +1271,26 @@
             .courses-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 80px;
+                right: 20px;
+            }
+
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .volume-control {
+                padding: 10px;
+            }
+
+            .volume-slider {
+                width: 120px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1195,6 +1319,18 @@
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
+            }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 70px;
+                right: 15px;
+            }
+
+            .music-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
             }
         }
 
@@ -1226,6 +1362,22 @@
 
             .contact-number {
                 min-width: 100%;
+            }
+
+            /* Music Player Mobile */
+            .music-player {
+                bottom: 60px;
+                right: 10px;
+            }
+
+            .music-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .volume-slider {
+                width: 100px;
             }
         }
 
@@ -1377,6 +1529,24 @@
     </style>
 </head>
 <body>
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="volume-control" id="volumeControl">
+            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+            <div class="volume-value" id="volumeValue">50%</div>
+            <div class="music-label">RUKI PROGRAMMER</div>
+        </div>
+        <button class="music-toggle" id="musicToggle">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Matrix Background Animation -->
     <canvas id="matrix-bg"></canvas>
     
@@ -2105,7 +2275,103 @@
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Matrix Background Animation
+        // ==================== MUSIC PLAYER FUNCTIONALITY ====================
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        const volumeControl = document.getElementById('volumeControl');
+        const musicIcon = musicToggle.querySelector('i');
+
+        // Initialize music settings from localStorage or default
+        let isMuted = localStorage.getItem('musicMuted') === 'true';
+        let volume = localStorage.getItem('musicVolume') ? parseInt(localStorage.getItem('musicVolume')) : 50;
+
+        // Set initial state
+        backgroundMusic.volume = volume / 100;
+        volumeSlider.value = volume;
+        volumeValue.textContent = volume + '%';
+
+        if (isMuted) {
+            backgroundMusic.muted = true;
+            musicToggle.classList.add('muted');
+            musicIcon.classList.remove('fa-volume-up');
+            musicIcon.classList.add('fa-volume-mute');
+        } else {
+            // Play music on page load (with user interaction requirement)
+            document.addEventListener('click', function initializeMusic() {
+                if (!backgroundMusic.played.length > 0) {
+                    backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
+                }
+                document.removeEventListener('click', initializeMusic);
+            });
+        }
+
+        // Toggle mute/unmute
+        musicToggle.addEventListener('click', function() {
+            isMuted = !isMuted;
+            backgroundMusic.muted = isMuted;
+            
+            if (isMuted) {
+                musicToggle.classList.add('muted');
+                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.add('fa-volume-mute');
+            } else {
+                musicToggle.classList.remove('muted');
+                musicIcon.classList.remove('fa-volume-mute');
+                musicIcon.classList.add('fa-volume-up');
+                // Ensure music plays when unmuted
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.log("Play prevented:", e));
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('musicMuted', isMuted);
+        });
+
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            volume = this.value;
+            backgroundMusic.volume = volume / 100;
+            volumeValue.textContent = volume + '%';
+            
+            // Save to localStorage
+            localStorage.setItem('musicVolume', volume);
+            
+            // If volume is 0, show muted icon
+            if (volume == 0 && !isMuted) {
+                backgroundMusic.muted = true;
+                musicToggle.classList.add('muted');
+                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.add('fa-volume-mute');
+                isMuted = true;
+                localStorage.setItem('musicMuted', true);
+            } else if (volume > 0 && isMuted) {
+                backgroundMusic.muted = false;
+                musicToggle.classList.remove('muted');
+                musicIcon.classList.remove('fa-volume-mute');
+                musicIcon.classList.add('fa-volume-up');
+                isMuted = false;
+                localStorage.setItem('musicMuted', false);
+            }
+        });
+
+        // Show volume control on hover
+        musicToggle.addEventListener('mouseenter', function() {
+            volumeControl.style.display = 'flex';
+        });
+
+        volumeControl.addEventListener('mouseleave', function() {
+            volumeControl.style.display = 'none';
+        });
+
+        // Keep volume control visible when interacting with it
+        volumeControl.addEventListener('mouseenter', function() {
+            this.style.display = 'flex';
+        });
+
+        // ==================== MATRIX BACKGROUND ====================
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
 
@@ -2165,7 +2431,7 @@
             }
         });
 
-        // Particles.js Background
+        // ==================== PARTICLES BACKGROUND ====================
         particlesJS("particles-js", {
             particles: {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -2200,6 +2466,7 @@
             retina_detect: true
         });
 
+        // ==================== DATA AND INITIALIZATION ====================
         // Services Data (Course Services)
         const services = [
             { 
@@ -2522,6 +2789,7 @@
             { name: "TikTok", icon: "fab fa-tiktok", url: "#", color: "#000000" }
         ];
 
+        // ==================== GENERATE DYNAMIC CONTENT ====================
         // Generate Service Cards
         const servicesGrid = document.querySelector('.services-grid');
         services.forEach(service => {
@@ -2593,7 +2861,7 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Mobile Menu Toggle
+        // ==================== MOBILE MENU FUNCTIONALITY ====================
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navMenu = document.getElementById('navMenu');
         
@@ -2630,7 +2898,7 @@
             });
         });
 
-        // Boost Tabs Functionality
+        // ==================== BOOST TABS FUNCTIONALITY ====================
         const boostTabs = document.querySelectorAll('.boost-tab');
         const boostContents = document.querySelectorAll('.boost-content');
 
@@ -2650,6 +2918,7 @@
             });
         });
 
+        // ==================== COURSE MODAL FUNCTIONALITY ====================
         // Course Card Click Event (Open Modal)
         document.querySelectorAll('.course-card').forEach(card => {
             card.addEventListener('click', function(e) {
@@ -2762,6 +3031,7 @@
             alert(`Opening WhatsApp to order "${courseTitle}". Please complete the order process by sending the message.`);
         });
 
+        // ==================== BOOST ORDER FUNCTIONALITY ====================
         // Social Media Boost Order Buttons
         document.querySelectorAll('.boost-btn').forEach(button => {
             button.addEventListener('click', function() {
@@ -2860,6 +3130,7 @@
             document.getElementById('courseOrderForm').reset();
         });
 
+        // ==================== ANIMATIONS AND OTHER FEATURES ====================
         // Stats Counter Animation
         function animateStats() {
             const statNumbers = document.querySelectorAll('.stat-number');
