@@ -257,7 +257,6 @@
             text-transform: uppercase;
             letter-spacing: 4px;
             text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
-            animation: glitch 3s infinite, float 6s ease-in-out infinite;
             background: linear-gradient(90deg, var(--primary-color), #00ff88, var(--primary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -270,11 +269,6 @@
             to {
                 background-position: 200% center;
             }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
         }
 
         .hero p {
@@ -291,23 +285,6 @@
             text-shadow: 0 0 10px var(--primary-color);
             position: relative;
             display: inline-block;
-        }
-
-        .highlight:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-            box-shadow: 0 0 10px var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .highlight:hover:after {
-            transform: scaleX(1);
         }
 
         .cta-button {
@@ -328,22 +305,6 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-        }
-
-        .cta-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-
-        .cta-button:hover:before {
-            left: 100%;
         }
 
         .cta-button:hover {
@@ -390,21 +351,6 @@
             backdrop-filter: blur(5px);
         }
 
-        .course-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
-            transition: 0.8s;
-        }
-
-        .course-card:hover:before {
-            left: 100%;
-        }
-
         .course-card:hover {
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 255, 0, 0.3);
@@ -445,25 +391,6 @@
             position: relative;
         }
 
-        .services-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(45deg, transparent 49%, rgba(0, 255, 0, 0.03) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(0, 255, 0, 0.03) 50%, transparent 51%);
-            background-size: 30px 30px;
-            z-index: 0;
-        }
-
-        .services-container {
-            position: relative;
-            z-index: 1;
-        }
-
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -480,21 +407,6 @@
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
-        }
-
-        .service-card:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 0;
-            background-color: var(--primary-color);
-            transition: height 0.4s;
-        }
-
-        .service-card:hover:after {
-            height: 100%;
         }
 
         .service-card:hover {
@@ -521,13 +433,231 @@
             line-height: 1.7;
         }
 
-        /* Order Section */
-        .order-section {
+        /* NEW: Social Media Boost Section */
+        .boost-section {
+            padding: 6rem 0;
+            background-color: rgba(5, 10, 15, 0.95);
+            position: relative;
+        }
+
+        .boost-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .boost-tab {
+            background-color: rgba(10, 15, 30, 0.7);
+            border: 2px solid var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .boost-tab:hover {
+            background-color: rgba(255, 0, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .boost-tab.active {
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        .boost-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .boost-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .boost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .boost-card {
+            background-color: rgba(10, 15, 30, 0.9);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .boost-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .boost-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .boost-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            color: white;
+        }
+
+        .boost-title {
+            font-size: 1.8rem;
+            color: white;
+            margin: 0;
+        }
+
+        .boost-description {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .boost-packages {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .boost-packages li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .boost-packages i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .boost-price {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .boost-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .boost-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.4);
+        }
+
+        /* Boost Images Gallery */
+        .boost-images-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .boost-image-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s;
+        }
+
+        .boost-image-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 30px rgba(255, 0, 255, 0.3);
+        }
+
+        .boost-image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--primary-color);
+            padding: 1rem;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .boost-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .boost-images-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .boost-images-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Boost Order Form */
+        .boost-order-section {
             padding: 6rem 0;
             background-color: rgba(0, 20, 0, 0.9);
         }
 
-        .order-container {
+        .boost-order-container {
             max-width: 800px;
             margin: 0 auto;
             background-color: rgba(0, 30, 0, 0.8);
@@ -537,7 +667,7 @@
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
         }
 
-        .order-form {
+        .boost-order-form {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -644,73 +774,21 @@
             text-shadow: 0 0 10px var(--primary-color);
         }
 
-        /* Social Media Section */
-        .social-section {
-            padding: 5rem 0;
-            background-color: rgba(0, 20, 0, 0.9);
-            position: relative;
-        }
-
-        .social-container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .social-link {
+        .contact-numbers {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: all 0.3s;
-            padding: 2rem 1rem;
-            border-radius: 10px;
-            background-color: rgba(0, 30, 0, 0.5);
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .social-link:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 0, 0.05) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .social-link:hover:before {
-            transform: translateX(100%);
-        }
-
-        .social-link:hover {
-            color: var(--primary-color);
+        .contact-number {
             background-color: rgba(0, 255, 0, 0.05);
-            border-color: var(--primary-color);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
-        }
-
-        .social-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover .social-icon {
-            transform: scale(1.2);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            min-width: 200px;
         }
 
         /* Features Section */
@@ -776,25 +854,65 @@
             font-size: 1.5rem;
         }
 
+        /* Social Media Section */
+        .social-section {
+            padding: 5rem 0;
+            background-color: rgba(0, 20, 0, 0.9);
+            position: relative;
+        }
+
+        .social-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(0, 255, 0, 0.05);
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2);
+        }
+
         /* Footer */
         footer {
             background-color: rgba(0, 8, 0, 0.95);
             padding: 4rem 0 2rem;
             border-top: 3px solid var(--primary-color);
             position: relative;
-        }
-
-        footer:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(transparent 98%, rgba(0, 255, 0, 0.1) 100%);
-            background-size: 100% 30px;
-            z-index: 0;
         }
 
         .footer-content {
@@ -899,6 +1017,40 @@
             margin-bottom: 10px;
         }
 
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            transform: translateY(-5px);
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .nav-container {
@@ -935,7 +1087,7 @@
                 font-size: 2.2rem;
             }
 
-            .courses-grid, .services-grid, .features-grid, .social-links {
+            .courses-grid, .services-grid, .features-grid, .social-links, .boost-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -946,40 +1098,17 @@
             .stat-number {
                 font-size: 2.8rem;
             }
-        }
 
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 255, 0, 0.2);
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-        }
+            .boost-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
 
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            background-color: var(--primary-color);
-            color: var(--dark-color);
-            box-shadow: 0 0 20px var(--primary-color);
-            transform: translateY(-5px);
+            .boost-tab {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -1005,9 +1134,9 @@
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
                     <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
-                    <li><a href="#order"><i class="fas fa-shopping-cart"></i> Order</a></li>
+                    <li><a href="#boost"><i class="fas fa-rocket"></i> Social Boost</a></li>
+                    <li><a href="#order"><i class="fas fa-shopping-cart"></i> Order Courses</a></li>
                     <li><a href="#social"><i class="fas fa-share-alt"></i> Connect</a></li>
-                    
                 </ul>
             </nav>
         </div>
@@ -1018,7 +1147,7 @@
         <div class="container hero-content">
             <h2 class="animate__animated animate__fadeInDown">WELCOME TO MY WEBSITE</h2>
             <p class="animate__animated animate__fadeInUp">Become a <span class="highlight">Complete Expert Hacker</span> with our comprehensive cyber security and ethical hacking training programs. Master <span class="highlight">Kali Linux, Termux, Dark Web</span>, and advanced penetration testing techniques with hands-on practical experience.</p>
-            <a href="#order" class="cta-button animate__animated animate__pulse animate__infinite">Order Now</a>
+            <a href="#boost" class="cta-button animate__animated animate__pulse animate__infinite">Boost Social Media</a>
         </div>
     </section>
 
@@ -1034,11 +1163,9 @@
                     <div class="stat-number" data-count="5000">0</div>
                     <h3>Students Trained</h3>
                 </div>
-                
-                    
                 <div class="stat-card">
-                    <div class="stat-number" data-count="50">0</div>
-                    <h3>Tools & Resources</h3>
+                    <div class="stat-number" data-count="10000">0</div>
+                    <h3>Social Media Boosts</h3>
                 </div>
             </div>
         </div>
@@ -1056,7 +1183,7 @@
 
     <!-- Services Section (Course Services) -->
     <section class="services-section" id="services">
-        <div class="container services-container">
+        <div class="container">
             <h2 class="section-title">Our Services</h2>
             <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">We provide comprehensive ethical hacking and cyber security services including:</p>
             <div class="services-grid">
@@ -1065,33 +1192,184 @@
         </div>
     </section>
 
-    <!-- Order Section -->
-    <section class="order-section" id="order">
+    <!-- NEW: Social Media Boost Section -->
+    <section class="boost-section" id="boost">
         <div class="container">
-            <h2 class="section-title">Order Courses</h2>
-            <div class="order-container">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Place Your Order via WhatsApp</h3>
+            <h2 class="section-title">Social Media Boost Services</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Boost your social media presence instantly! Get real followers, likes, views, and engagement across all major platforms.
+            </p>
+            
+
+            <!-- Account Recovery Content -->
+            <div class="boost-content" id="recovery-content">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--accent-color);">
+                    <i class="fas fa-user-shield"></i> Account Recovery Services
+                </h3>
+                <div class="boost-grid">
+                    <div class="boost-card">
+                        <div class="boost-header">
+                            <div class="boost-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <h3 class="boost-title">Account Recovery & Hacking</h3>
+                        </div>
+                        <p class="boost-description">Professional account recovery and security services for all social media platforms.</p>
+                        <ul class="boost-packages">
+                            <li><i class="fas fa-check"></i> Account Recovery Services</li>
+                            <li><i class="fas fa-check"></i> Hacked Account Recovery</li>
+                            <li><i class="fas fa-check"></i> Security Bypass Services</li>
+                            <li><i class="fas fa-check"></i> Banned Account Unbanning</li>
+                            <li><i class="fas fa-check"></i> Profile Protection Setup</li>
+                        </ul>
+                        <div class="boost-price">Contact for Price</div>
+                        <button class="boost-btn" data-service="Account Recovery">
+                            <i class="fab fa-whatsapp"></i> Contact Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+     
+            
+            <!-- WhatsApp Contact -->
+            <div class="whatsapp-info" style="margin-top: 4rem;">
+                <h4><i class="fas fa-bolt"></i> Need Custom Boost Package?</h4>
+                <p>Contact us on WhatsApp for customized social media boost packages tailored to your needs.</p>
                 
-                <form class="order-form" id="orderForm">
+                <div class="contact-numbers">
+                    <div class="contact-number">
+                        <h4><i class="fab fa-whatsapp"></i> WhatsApp 1</h4>
+                        <div class="whatsapp-number">+94 71 932 0832</div>
+                    </div>
+                    <div class="contact-number">
+                        <h4><i class="fab fa-whatsapp"></i> WhatsApp 2</h4>
+                        <div class="whatsapp-number">+94 76 420 7978</div>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/94719320832?text=Hi!%20I'm%20interested%20in%20Social%20Media%20Boost%20services" 
+                   target="_blank" 
+                   class="boost-btn" 
+                   style="margin-top: 1.5rem; width: auto; display: inline-block; padding: 12px 30px;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boost Order Form Section -->
+    <section class="boost-order-section" id="boost-order">
+        <div class="container">
+            <h2 class="section-title">Order Social Media Boost</h2>
+            <div class="boost-order-container">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Place Your Boost Order via WhatsApp</h3>
+                
+                <form class="boost-order-form" id="boostOrderForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name"><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                            <label for="boost-name"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="boost-name" name="name" required placeholder="Enter your full name">
                         </div>
                         <div class="form-group">
-                            <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Enter your WhatsApp number">
+                            <label for="boost-phone"><i class="fas fa-phone"></i> WhatsApp Number</label>
+                            <input type="tel" id="boost-phone" name="phone" required placeholder="Enter your WhatsApp number">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                            <label for="boost-platform"><i class="fas fa-globe"></i> Select Platform</label>
+                            <select id="boost-platform" name="platform" required>
+                                <option value="">-- Select platform --</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="recovery">Account Recovery</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="country"><i class="fas fa-globe"></i> Country</label>
-                            <input type="text" id="country" name="country" required placeholder="Enter your country">
+                            <label for="boost-service"><i class="fas fa-cogs"></i> Select Service</label>
+                            <select id="boost-service" name="service" required>
+                                <option value="">-- Select service --</option>
+                                <option value="likes">Likes</option>
+                                <option value="followers">Followers/Subscribers</option>
+                                <option value="views">Views</option>
+                                <option value="recovery">Account Recovery</option>
+                                <option value="custom">Custom Package</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="boost-quantity"><i class="fas fa-hashtag"></i> Quantity</label>
+                            <input type="text" id="boost-quantity" name="quantity" required placeholder="e.g., 1000 followers, 5000 views">
+                        </div>
+                        <div class="form-group">
+                            <label for="boost-budget"><i class="fas fa-money-bill"></i> Your Budget (Optional)</label>
+                            <input type="text" id="boost-budget" name="budget" placeholder="Enter your budget in Rs.">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="boost-message"><i class="fas fa-comment"></i> Additional Details</label>
+                        <textarea id="boost-message" name="message" placeholder="Provide details like profile link, specific requirements, etc."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i> Send Boost Order
+                    </button>
+                </form>
+                
+                <div class="whatsapp-info">
+                    <h4><i class="fab fa-whatsapp"></i> Direct WhatsApp Order</h4>
+                    <p>You can also send your order directly to our WhatsApp numbers:</p>
+                    
+                    <div class="contact-numbers">
+                        <div class="contact-number">
+                            <div class="whatsapp-number">+94 71 932 0832</div>
+                        </div>
+                        <div class="contact-number">
+                            <div class="whatsapp-number">+94 76 420 7978</div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 1rem;">We'll contact you within 30 minutes with package details and pricing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Order Section -->
+    <section class="order-section" id="order">
+        <div class="container">
+            <h2 class="section-title">Order Courses</h2>
+            <div class="boost-order-container">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Place Your Course Order via WhatsApp</h3>
+                
+                <form class="boost-order-form" id="courseOrderForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="course-name"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="course-name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="course-phone"><i class="fas fa-phone"></i> Phone Number</label>
+                            <input type="tel" id="course-phone" name="phone" required placeholder="Enter your WhatsApp number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="course-email"><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="course-email" name="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group">
+                            <label for="course-country"><i class="fas fa-globe"></i> Country</label>
+                            <input type="text" id="course-country" name="country" required placeholder="Enter your country">
                         </div>
                     </div>
                     
@@ -1125,18 +1403,25 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="message"><i class="fas fa-comment"></i> Additional Message (Optional)</label>
-                        <textarea id="message" name="message" placeholder="Any specific requirements or questions..."></textarea>
+                        <label for="course-message"><i class="fas fa-comment"></i> Additional Message (Optional)</label>
+                        <textarea id="course-message" name="message" placeholder="Any specific requirements or questions..."></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        <i class="fab fa-whatsapp"></i> Order WhatsApp
+                        <i class="fab fa-whatsapp"></i> Order Course
                     </button>
                 </form>
                 
                 <div class="whatsapp-info">
-                    <h4><i class="fab fa-whatsapp"></i> WhatsApp Order Number</h4>
-                    <div class="whatsapp-number">+94 71 932 0832</div>
+                    <h4><i class="fab fa-whatsapp"></i> WhatsApp Order Numbers</h4>
+                    <div class="contact-numbers">
+                        <div class="contact-number" style="min-width: 200px;">
+                            <div class="whatsapp-number">+94 71 932 0832</div>
+                        </div>
+                        <div class="contact-number" style="min-width: 200px;">
+                            <div class="whatsapp-number">+94 76 420 7978</div>
+                        </div>
+                    </div>
                     <p style="margin-top: 1rem;">Your order will be sent directly to our WhatsApp number. We'll contact you within 24 hours with course access details.</p>
                 </div>
             </div>
@@ -1150,33 +1435,33 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-number">01</div>
-                    <h3><i class="fas fa-check-circle feature-icon"></i> Practical Learning</h3>
-                    <p>Hands-on labs, real-world scenarios, and practical exercises ensure you gain actual hacking skills, not just theoretical knowledge.</p>
+                    <h3><i class="fas fa-check-circle feature-icon"></i> Real & Active Profiles</h3>
+                    <p>We provide real, active social media profiles for all boost services, ensuring genuine engagement and growth.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-number">02</div>
-                    <h3><i class="fas fa-users feature-icon"></i> Expert Community</h3>
-                    <p>Join our exclusive community of ethical hackers, security researchers, and cyber security professionals for collaboration and support.</p>
+                    <h3><i class="fas fa-bolt feature-icon"></i> Instant Delivery</h3>
+                    <p>Most boost services are delivered instantly or within 24 hours, depending on the package size.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-number">03</div>
-                    <h3><i class="fas fa-sync-alt feature-icon"></i> Lifetime Updates</h3>
-                    <p>All courses include lifetime access with regular updates to keep you current with the latest tools, techniques, and vulnerabilities.</p>
+                    <h3><i class="fas fa-shield-alt feature-icon"></i> Safe & Secure</h3>
+                    <p>All services are delivered safely without risking your account security or violating platform terms.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-number">04</div>
                     <h3><i class="fas fa-headset feature-icon"></i> 24/7 Support</h3>
-                    <p>Get help whenever you need it with our 24/7 support system, including forums, live chats, and direct instructor access.</p>
+                    <p>Get help whenever you need it with our 24/7 support system via WhatsApp and Telegram.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-number">05</div>
-                    <h3><i class="fas fa-certificate feature-icon"></i> Certification</h3>
-                    <p>Receive industry-recognized certificates upon course completion to validate your skills and boost your career prospects.</p>
+                    <h3><i class="fas fa-users feature-icon"></i> Sri Lanka Audience</h3>
+                    <p>Special packages available with Sri Lanka audience targeting for local business growth.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-number">06</div>
-                    <h3><i class="fas fa-briefcase feature-icon"></i> Career Guidance</h3>
-                    <p>Get personalized career guidance, resume reviews, and job placement assistance in the cyber security industry.</p>
+                    <h3><i class="fas fa-money-bill-wave feature-icon"></i> Best Prices</h3>
+                    <p>Competitive pricing with the best value for money in the social media boost industry.</p>
                 </div>
             </div>
         </div>
@@ -1201,7 +1486,7 @@
                     <div class="footer-logo">
                         <i class="fas fa-user-secret"></i> RUKI PROGRAMMER
                     </div>
-                    <p>Ethical Hacking & Cyber Security Training Platform providing comprehensive courses for aspiring security professionals.</p>
+                    <p>Ethical Hacking & Cyber Security Training Platform providing comprehensive courses and social media boost services.</p>
                     <div class="social-links" style="grid-template-columns: repeat(4, 1fr); margin-top: 20px;">
                         <!-- Mini social links will be added by JavaScript -->
                     </div>
@@ -1212,24 +1497,26 @@
                         <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
                         <li><a href="#courses"><i class="fas fa-chevron-right"></i> All Courses</a></li>
                         <li><a href="#services"><i class="fas fa-chevron-right"></i> Our Services</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> Social Boost</a></li>
                         <li><a href="#order"><i class="fas fa-chevron-right"></i> Order Courses</a></li>
-                        <li><a href="#social"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#boost-order"><i class="fas fa-chevron-right"></i> Order Boost</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Popular Courses</h3>
+                    <h3>Boost Services</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Kali Linux Mastery</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Web App Hacking</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> WiFi Penetration Testing</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Social Engineering</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Mobile Security</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> Facebook Boost</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> Instagram Boost</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> TikTok Boost</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> YouTube Boost</a></li>
+                        <li><a href="#boost"><i class="fas fa-chevron-right"></i> Account Recovery</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><a href="tel:94719320832"><i class="fas fa-phone"></i> +94 71 932 0832</a></li>
+                        <li><a href="tel:94719320832"><i class="fab fa-whatsapp"></i> +94 71 932 0832</a></li>
+                        <li><a href="tel:94764207978"><i class="fab fa-whatsapp"></i> +94 76 420 7978</a></li>
                         <li><a href="mailto:contact@rukiprogrammer.com"><i class="fas fa-envelope"></i> contact@rukiprogrammer.com</a></li>
                         <li><a href="#"><i class="fas fa-map-marker-alt"></i> Colombo, Sri Lanka</a></li>
                         <li><a href="#"><i class="fas fa-clock"></i> 24/7 Support Available</a></li>
@@ -1239,7 +1526,7 @@
             <div class="footer-bottom">
                 <p>© <span id="current-year"></span> Ruki Programmer. All rights reserved.</p>
                 <div class="copyright">
-                    Disclaimer: This platform is for Business only. All courses promote ethical hacking and legal cyber security. 
+                    Disclaimer: All social media boost services use legitimate methods. Account recovery services are for legitimate account owners only.
                 </div>
             </div>
         </div>
@@ -1399,66 +1686,6 @@
                 title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", 
                 description: "Comprehensive web application security testing and wireless network penetration training.",
                 icon: "fas fa-globe"
-            },
-            { 
-                title: "BECOME A COMPLETE EXPERT HACKER", 
-                description: "End-to-end ethical hacking training program covering all aspects of cyber security.",
-                icon: "fas fa-user-ninja"
-            },
-            { 
-                title: "COMPUTER NETWORKING FUNDAMENTALS", 
-                description: "Essential networking knowledge for security professionals including protocols and architecture.",
-                icon: "fas fa-network-wired"
-            },
-            { 
-                title: "LINUX FOR HACKING", 
-                description: "Linux command line mastery specifically tailored for penetration testing and security assessment.",
-                icon: "fab fa-linux"
-            },
-            { 
-                title: "HACKING METHODOLOGY", 
-                description: "Structured approach to ethical hacking following industry-standard methodologies and frameworks.",
-                icon: "fas fa-project-diagram"
-            },
-            { 
-                title: "APPLICATIONS HACKING", 
-                description: "Security testing of desktop and mobile applications including reverse engineering techniques.",
-                icon: "fas fa-mobile-alt"
-            },
-            { 
-                title: "WINDOWS HACKING", 
-                description: "Windows system security assessment, privilege escalation, and defense techniques.",
-                icon: "fab fa-windows"
-            },
-            { 
-                title: "WEB APPLICATIONS & WI-FI HACKING", 
-                description: "Combined training in web application security and wireless network penetration testing.",
-                icon: "fas fa-wifi"
-            },
-            { 
-                title: "ETHICAL HACKING AND PENETRATION TESTING", 
-                description: "Professional penetration testing training following ethical hacking principles and standards.",
-                icon: "fas fa-shield-alt"
-            },
-            { 
-                title: "CYBER SECURITY LAWS AND ETHICS", 
-                description: "Understanding legal frameworks, regulations, and ethical considerations in cyber security.",
-                icon: "fas fa-gavel"
-            },
-            { 
-                title: "SECURITY OPERATIONS AND MONITORING", 
-                description: "Security operations center (SOC) training including monitoring, detection, and response.",
-                icon: "fas fa-eye"
-            },
-            { 
-                title: "CASE STUDY ANALYSIS IN ETHICAL HACKING", 
-                description: "Real-world case studies analysis to understand practical application of hacking techniques.",
-                icon: "fas fa-chart-bar"
-            },
-            { 
-                title: "FINAL PROJECT & EXAM", 
-                description: "Capstone project and certification exam to validate your ethical hacking skills.",
-                icon: "fas fa-tasks"
             }
         ];
 
@@ -1473,30 +1700,19 @@
             { title: "PASSWORD CRACKING METHODS", icon: "fas fa-key", level: "Intermediate" },
             { title: "CARDING COMPLETE COURSE", icon: "fas fa-credit-card", level: "Advanced" },
             { title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", icon: "fas fa-globe", level: "Advanced" },
-            { title: "BECOME A COMPLETE EXPERT HACKER", icon: "fas fa-graduation-cap", level: "All Levels" },
-            { title: "COMPUTER NETWORKING FUNDAMENTALS", icon: "fas fa-network-wired", level: "Beginner" },
-            { title: "LINUX FOR HACKING", icon: "fab fa-linux", level: "Beginner" },
-            { title: "HACKING METHODOLOGY", icon: "fas fa-project-diagram", level: "Intermediate" },
-            { title: "APPLICATIONS HACKING", icon: "fas fa-mobile-alt", level: "Intermediate" },
-            { title: "WINDOWS HACKING", icon: "fab fa-windows", level: "Intermediate" },
-            { title: "WEB APPLICATIONS & WI-FI HACKING", icon: "fas fa-wifi", level: "Advanced" },
-            { title: "ETHICAL HACKING AND PENETRATION TESTING", icon: "fas fa-shield-alt", level: "Advanced" },
-            { title: "CYBER SECURITY LAWS AND ETHICS", icon: "fas fa-gavel", level: "All Levels" },
-            { title: "SECURITY OPERATIONS AND MONITORING", icon: "fas fa-eye", level: "Advanced" },
-            { title: "CASE STUDY ANALYSIS IN ETHICAL HACKING", icon: "fas fa-chart-bar", level: "Advanced" },
-            { title: "FINAL PROJECT & EXAM", icon: "fas fa-tasks", level: "All Levels" }
+            { title: "BECOME A COMPLETE EXPERT HACKER", icon: "fas fa-graduation-cap", level: "All Levels" }
         ];
+
+       
 
         // Social Media Links
         const socialLinks = [
             { name: "YouTube", icon: "fab fa-youtube", url: "https://youtube.com/@rukiprogrammer-dg4sp?si=23nqVSzyi5vTrQGn", color: "#FF0000" },
-            { name: "Telegram", icon: "fab fa-telegram", url: "#", color: "#0088cc" },
-            { name: "Instagram", icon: "fab fa-instagram", url: "#", color: "#E4405F" },
             { name: "Facebook", icon: "fab fa-facebook", url: "https://www.facebook.com/rukshan.shaminda.rajapaksha", color: "#1877F2" },
-            { name: "Twitter", icon: "fab fa-twitter", url: "#", color: "#1DA1F2" },
-            { name: "GitHub", icon: "fab fa-github", url: "#", color: "#ffffff" },
-            { name: "Discord", icon: "fab fa-discord", url: "#", color: "#5865F2" },
-            { name: "LinkedIn", icon: "fab fa-linkedin", url: "#", color: "#0A66C2" }
+            { name: "WhatsApp 1", icon: "fab fa-whatsapp", url: "https://wa.me/94719320832", color: "#25D366" },
+            { name: "WhatsApp 2", icon: "fab fa-whatsapp", url: "https://wa.me/94764207978", color: "#25D366" },
+            { name: "Instagram", icon: "fab fa-instagram", url: "#", color: "#E4405F" },
+            { name: "TikTok", icon: "fab fa-tiktok", url: "#", color: "#000000" }
         ];
 
         // Generate Service Cards
@@ -1523,6 +1739,18 @@
                 <span class="course-level">${course.level}</span>
             `;
             coursesGrid.appendChild(courseCard);
+        });
+
+        // Generate Boost Images Gallery
+        const boostImagesGallery = document.querySelector('.boost-images-gallery');
+        boostImages.forEach(image => {
+            const imageItem = document.createElement('div');
+            imageItem.className = 'boost-image-item';
+            imageItem.innerHTML = `
+                <div class="boost-image-title">${image.title}</div>
+                <img src="${image.src}" alt="${image.description}" class="boost-image">
+            `;
+            boostImagesGallery.appendChild(imageItem);
         });
 
         // Generate Social Links
@@ -1554,27 +1782,71 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // WhatsApp Order Form
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
+        // Boost Tabs Functionality
+        const boostTabs = document.querySelectorAll('.boost-tab');
+        const boostContents = document.querySelectorAll('.boost-content');
+
+        boostTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs
+                boostTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all content
+                boostContents.forEach(content => content.classList.remove('active'));
+                // Show selected content
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+
+        // Social Media Boost Order Buttons
+        document.querySelectorAll('.boost-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const service = this.getAttribute('data-service');
+                
+                // Format WhatsApp message for boost service
+                const whatsappMessage = `*Social Media Boost Order - Ruki Programmer*%0A%0A` +
+                                       `🔥 *Service:* ${service}%0A` +
+                                       `💬 *Message:* I want to order ${service} package. Please send me details and pricing.%0A%0A` +
+                                       `> Order placed via Ruki Programmer Website`;
+                
+                // WhatsApp API URL
+                const whatsappNumber = "94719320832";
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                
+                // Open WhatsApp in new tab
+                window.open(whatsappUrl, '_blank');
+                
+                // Show success message
+                alert(`Opening WhatsApp to order ${service}. Please complete the order process.`);
+            });
+        });
+
+        // Boost Order Form
+        document.getElementById('boostOrderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const country = document.getElementById('country').value;
-            const course = document.getElementById('course').value;
-            const courseText = document.getElementById('course').options[document.getElementById('course').selectedIndex].text;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('boost-name').value;
+            const phone = document.getElementById('boost-phone').value;
+            const platform = document.getElementById('boost-platform').value;
+            const service = document.getElementById('boost-service').value;
+            const quantity = document.getElementById('boost-quantity').value;
+            const budget = document.getElementById('boost-budget').value;
+            const message = document.getElementById('boost-message').value;
             
             // Format WhatsApp message
-            const whatsappMessage = `*New  Order - Ruki Programmer*%0A%0A` +
+            const whatsappMessage = `*Social Media Boost Order - Ruki Programmer*%0A%0A` +
                                    `😎 *Name:* ${name}%0A` +
                                    `📞 *Phone:* ${phone}%0A` +
-                                   `📠 *Email:* ${email}%0A` +
-                                   `💥 *Country:* ${country}%0A` +
-                                   `⚫ *Course:* ${courseText}%0A` +
-                                   `🖋️ *Message:* ${message || 'No additional message'}%0A%0A` +
+                                   `📱 *Platform:* ${platform}%0A` +
+                                   `⚙️ *Service:* ${service}%0A` +
+                                   `🔢 *Quantity:* ${quantity}%0A` +
+                                   `💰 *Budget:* ${budget || 'Not specified'}%0A` +
+                                   `📝 *Details:* ${message || 'No additional details'}%0A%0A` +
                                    `> Order placed via Ruki Programmer Website`;
             
             // WhatsApp API URL
@@ -1585,10 +1857,47 @@
             window.open(whatsappUrl, '_blank');
             
             // Show success message
-            alert("Opening WhatsApp to send your order. Please complete the order process by sending the message.");
+            alert("Opening WhatsApp to send your boost order. Please complete the order process by sending the message.");
             
             // Reset form
-            document.getElementById('orderForm').reset();
+            document.getElementById('boostOrderForm').reset();
+        });
+
+        // Course Order Form
+        document.getElementById('courseOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('course-name').value;
+            const phone = document.getElementById('course-phone').value;
+            const email = document.getElementById('course-email').value;
+            const country = document.getElementById('course-country').value;
+            const course = document.getElementById('course').value;
+            const courseText = document.getElementById('course').options[document.getElementById('course').selectedIndex].text;
+            const message = document.getElementById('course-message').value;
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*Course Order - Ruki Programmer*%0A%0A` +
+                                   `😎 *Name:* ${name}%0A` +
+                                   `📞 *Phone:* ${phone}%0A` +
+                                   `📠 *Email:* ${email}%0A` +
+                                   `🌍 *Country:* ${country}%0A` +
+                                   `📚 *Course:* ${courseText}%0A` +
+                                   `📝 *Message:* ${message || 'No additional message'}%0A%0A` +
+                                   `> Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = "94719320832";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            alert("Opening WhatsApp to send your course order. Please complete the order process by sending the message.");
+            
+            // Reset form
+            document.getElementById('courseOrderForm').reset();
         });
 
         // Stats Counter Animation
@@ -1653,7 +1962,7 @@
             setTimeout(animateStats, 500);
             
             // Add animation classes to elements
-            const animateElements = document.querySelectorAll('.course-card, .service-card, .feature-card');
+            const animateElements = document.querySelectorAll('.course-card, .service-card, .feature-card, .boost-card, .boost-image-item');
             animateElements.forEach((el, index) => {
                 setTimeout(() => {
                     el.style.opacity = '1';
@@ -1663,7 +1972,7 @@
         });
 
         // Initialize elements with opacity 0 for animation
-        document.querySelectorAll('.course-card, .service-card, .feature-card').forEach(el => {
+        document.querySelectorAll('.course-card, .service-card, .feature-card, .boost-card, .boost-image-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
