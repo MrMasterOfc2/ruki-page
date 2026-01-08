@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruki Programmer - Ethical Hacking & Cyber Security</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #00cc00;
+            --accent-color: #ff00ff;
+            --dark-color: #001100;
+            --darker-color: #000a00;
+            --matrix-green: #00ff41;
+            --text-color: #e0e0e0;
+            --card-bg: rgba(0, 20, 0, 0.85);
+            --border-glow: 0 0 15px var(--primary-color);
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--darker-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 40, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 30, 0, 0.1) 0%, transparent 20%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Custom Borders */
+        .border-glow {
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--border-glow);
+            position: relative;
+        }
+
+        .border-glow::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .section-border {
+            border-top: 1px solid var(--secondary-color);
+            border-bottom: 1px solid var(--secondary-color);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.05), transparent);
+        }
+
+        /* Matrix Background Animation */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.08;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: -1;
+        }
+
+        /* Header with Background Image */
+        header {
+            background: 
+                linear-gradient(rgba(0, 10, 0, 0.9), rgba(0, 20, 0, 0.95)),
+                url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-bottom: 3px solid var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-overlay {
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(255, 0, 255, 0.05));
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color);
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            animation: rotate 10s linear infinite, pulse 3s infinite;
+            filter: drop-shadow(0 0 10px var(--primary-color));
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-button {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 25px var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 30, 0, 0.8) 0%, rgba(0, 10, 0, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+            animation: glitch 3s infinite, float 6s ease-in-out infinite;
+            background: linear-gradient(90deg, var(--primary-color), #00ff88, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .highlight:hover:after {
+            transform: scaleX(1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 35px var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Courses Section */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin: 5rem 0 3rem;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 15px auto;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .course-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .course-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transition: 0.8s;
+        }
+
+        .course-card:hover:before {
+            left: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .course-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+        }
+
+        .course-icon {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .course-level {
+            display: inline-block;
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Services Section - Course Services */
+        .services-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 15, 0, 0.8);
+            position: relative;
+        }
+
+        .services-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 49%, rgba(0, 255, 0, 0.03) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 255, 0, 0.03) 50%, transparent 51%);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        .services-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: rgba(0, 25, 0, 0.9);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background-color: var(--primary-color);
+            transition: height 0.4s;
+        }
+
+        .service-card:hover:after {
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px var(--primary-color));
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-card p {
+            color: #b0b0b0;
+            line-height: 1.7;
+        }
+
+        /* Order Section */
+        .order-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 20, 0, 0.9);
+        }
+
+        .order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 30, 0, 0.8);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background-color: rgba(0, 15, 0, 0.8);
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            padding: 12px 15px;
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 25px var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(0, 255, 0, 0.05);
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .whatsapp-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-number {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Social Media Section */
+        .social-section {
+            padding: 5rem 0;
+            background-color: rgba(0, 20, 0, 0.9);
+            position: relative;
+        }
+
+        .social-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            background-color: rgba(0, 30, 0, 0.5);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 0, 0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .social-link:hover:before {
+            transform: translateX(100%);
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(0, 255, 0, 0.05);
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background-color: rgba(0, 12, 0, 0.9);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: rgba(0, 25, 0, 0.8);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--primary-color));
+            z-index: -1;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover:before {
+            opacity: 1;
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(0, 255, 0, 0.1);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 8, 0, 0.95);
+            padding: 4rem 0 2rem;
+            border-top: 3px solid var(--primary-color);
+            position: relative;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(transparent 98%, rgba(0, 255, 0, 0.1) 100%);
+            background-size: 100% 30px;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Stats Counter */
+        .stats-section {
+            padding: 4rem 0;
+            background-color: rgba(0, 20, 0, 0.7);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .courses-grid, .services-grid, .features-grid, .social-links {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background Animation -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header with Background Image -->
+    <header class="border-glow">
+        <div class="header-overlay"></div>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h1>RUKI PROGRAMMER</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                    <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+                    <li><a href="#order"><i class="fas fa-shopping-cart"></i> Order</a></li>
+                    <li><a href="#social"><i class="fas fa-share-alt"></i> Connect</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section-border" id="home">
+        <div class="container hero-content">
+            <h2 class="animate__animated animate__fadeInDown">WELCOME TO MY WEBSITE</h2>
+            <p class="animate__animated animate__fadeInUp">Become a <span class="highlight">Complete Expert Hacker</span> with our comprehensive cyber security and ethical hacking training programs. Master <span class="highlight">Kali Linux, Termux, Dark Web</span>, and advanced penetration testing techniques with hands-on practical experience.</p>
+            <a href="#order" class="cta-button animate__animated animate__pulse animate__infinite">Order Now</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="100">0</div>
+                    <h3>Premium Courses</h3>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="5000">0</div>
+                    <h3>Students Trained</h3>
+                </div>
+                
+                    
+                <div class="stat-card">
+                    <div class="stat-number" data-count="50">0</div>
+                    <h3>Tools & Resources</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section-border">
+        <div class="container">
+            <h2 class="section-title">Our Premium Courses</h2>
+            <div class="courses-grid">
+                <!-- Course cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (Course Services) -->
+    <section class="services-section" id="services">
+        <div class="container services-container">
+            <h2 class="section-title">Our Services</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">We provide comprehensive ethical hacking and cyber security services including:</p>
+            <div class="services-grid">
+                <!-- Service cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="order-section" id="order">
+        <div class="container">
+            <h2 class="section-title">Order Courses</h2>
+            <div class="order-container">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Place Your Order via WhatsApp</h3>
+                
+                <form class="order-form" id="orderForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your WhatsApp number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+                        <div class="form-group">
+                            <label for="country"><i class="fas fa-globe"></i> Country</label>
+                            <input type="text" id="country" name="country" required placeholder="Enter your country">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course"><i class="fas fa-book"></i> Select Course Category</label>
+                        <select id="course" name="course" required>
+                            <option value="">-- Select a course category --</option>
+                            <option value="dark-web-kali-linux">DARK WEB, KALI LINUX, TERMUX LEARNING</option>
+                            <option value="computer-mobile-hacking">COMPUTER HACKING, MOBILE HACKING</option>
+                            <option value="android-wifi-hacking">ANDROID HACKING, WIFI HACKING COURSES</option>
+                            <option value="social-media-hacking">SOCIAL MEDIA HACKING</option>
+                            <option value="facebook-whatsapp">FACEBOOK, WHATSAPP HACKING</option>
+                            <option value="instagram-twitter">INSTAGRAM, TWITTER HACKING</option>
+                            <option value="password-cracking">PASSWORD CRACKING METHODS</option>
+                            <option value="carding">CARDING COMPLETE COURSE</option>
+                            <option value="web-wireless">HACKING WEB APPLICATIONS, WIRELESS HACKING</option>
+                            <option value="expert-hacker">BECOME A COMPLETE EXPERT HACKER</option>
+                            <option value="networking">COMPUTER NETWORKING FUNDAMENTALS</option>
+                            <option value="linux-hacking">LINUX FOR HACKING</option>
+                            <option value="methodology">HACKING METHODOLOGY</option>
+                            <option value="applications">APPLICATIONS HACKING</option>
+                            <option value="windows">WINDOWS HACKING</option>
+                            <option value="web-wifi">WEB APPLICATIONS & WI-FI HACKING</option>
+                            <option value="ethical-penetration">ETHICAL HACKING AND PENETRATION TESTING</option>
+                            <option value="cyber-laws">CYBER SECURITY LAWS AND ETHICS</option>
+                            <option value="security-operations">SECURITY OPERATIONS AND MONITORING</option>
+                            <option value="case-study">CASE STUDY ANALYSIS IN ETHICAL HACKING</option>
+                            <option value="final-project">FINAL PROJECT & EXAM</option>
+                            <option value="all-courses">ALL 100+ COURSES COMPLETE PACKAGE</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment"></i> Additional Message (Optional)</label>
+                        <textarea id="message" name="message" placeholder="Any specific requirements or questions..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i> Order WhatsApp
+                    </button>
+                </form>
+                
+                <div class="whatsapp-info">
+                    <h4><i class="fab fa-whatsapp"></i> WhatsApp Order Number</h4>
+                    <div class="whatsapp-number">+94 71 932 0832</div>
+                    <p style="margin-top: 1rem;">Your order will be sent directly to our WhatsApp number. We'll contact you within 24 hours with course access details.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3><i class="fas fa-check-circle feature-icon"></i> Practical Learning</h3>
+                    <p>Hands-on labs, real-world scenarios, and practical exercises ensure you gain actual hacking skills, not just theoretical knowledge.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3><i class="fas fa-users feature-icon"></i> Expert Community</h3>
+                    <p>Join our exclusive community of ethical hackers, security researchers, and cyber security professionals for collaboration and support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3><i class="fas fa-sync-alt feature-icon"></i> Lifetime Updates</h3>
+                    <p>All courses include lifetime access with regular updates to keep you current with the latest tools, techniques, and vulnerabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <h3><i class="fas fa-headset feature-icon"></i> 24/7 Support</h3>
+                    <p>Get help whenever you need it with our 24/7 support system, including forums, live chats, and direct instructor access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">05</div>
+                    <h3><i class="fas fa-certificate feature-icon"></i> Certification</h3>
+                    <p>Receive industry-recognized certificates upon course completion to validate your skills and boost your career prospects.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">06</div>
+                    <h3><i class="fas fa-briefcase feature-icon"></i> Career Guidance</h3>
+                    <p>Get personalized career guidance, resume reviews, and job placement assistance in the cyber security industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section" id="social">
+        <div class="container social-container">
+            <h2 class="section-title">Connect With Me</h2>
+            <p>Follow on social media for updates, hacking tips, free resources, and exclusive content</p>
+            <div class="social-links">
+                <!-- Social links will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-user-secret"></i> RUKI PROGRAMMER
+                    </div>
+                    <p>Ethical Hacking & Cyber Security Training Platform providing comprehensive courses for aspiring security professionals.</p>
+                    <div class="social-links" style="grid-template-columns: repeat(4, 1fr); margin-top: 20px;">
+                        <!-- Mini social links will be added by JavaScript -->
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> All Courses</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Our Services</a></li>
+                        <li><a href="#order"><i class="fas fa-chevron-right"></i> Order Courses</a></li>
+                        <li><a href="#social"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Popular Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Kali Linux Mastery</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Web App Hacking</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> WiFi Penetration Testing</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Social Engineering</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Mobile Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:94719320832"><i class="fas fa-phone"></i> +94 71 932 0832</a></li>
+                        <li><a href="mailto:contact@rukiprogrammer.com"><i class="fas fa-envelope"></i> contact@rukiprogrammer.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Colombo, Sri Lanka</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/7 Support Available</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="current-year"></span> Ruki Programmer. All rights reserved.</p>
+                <div class="copyright">
+                    Disclaimer: This platform is for Business only. All courses promote ethical hacking and legal cyber security. 
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Matrix Background Animation
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Matrix characters
+        const matrixChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+        const charsArray = matrixChars.split("");
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Initialize drops
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        }
+
+        // Matrix animation function
+        function drawMatrix() {
+            // Semi-transparent black rectangle for trail effect
+            ctx.fillStyle = "rgba(0, 10, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00ff41";
+            ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                // Random character
+                const char = charsArray[Math.floor(Math.random() * charsArray.length)];
+                
+                // Draw character
+                ctx.fillText(char, i * fontSize, drops[i]);
+                
+                // Move drop down
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i] += fontSize;
+            }
+        }
+
+        // Animation loop
+        let matrixInterval = setInterval(drawMatrix, 50);
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Reinitialize drops
+            drops.length = 0;
+            for (let i = 0; i < Math.floor(canvas.width / fontSize); i++) {
+                drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+            }
+        });
+
+        // Particles.js Background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ff00" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00cc00",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Services Data (Course Services)
+        const services = [
+            { 
+                title: "100+ PAID COURSES", 
+                description: "Complete access to all 100+ premium ethical hacking and cyber security courses with lifetime updates and support.",
+                icon: "fas fa-graduation-cap"
+            },
+            { 
+                title: "DARK WEB, KALI LINUX, TERMUX LEARNING", 
+                description: "Master Dark Web navigation, Kali Linux tools, and Termux mobile hacking platform with practical hands-on training.",
+                icon: "fas fa-user-secret"
+            },
+            { 
+                title: "COMPUTER HACKING, MOBILE HACKING", 
+                description: "Comprehensive training in computer system penetration testing and mobile device security assessment techniques.",
+                icon: "fas fa-laptop"
+            },
+            { 
+                title: "ANDROID HACKING, WIFI HACKING COURSES", 
+                description: "Specialized courses in Android application security testing and wireless network penetration methodologies.",
+                icon: "fas fa-wifi"
+            },
+            { 
+                title: "SOCIAL MEDIA HACKING", 
+                description: "Learn social media platform security testing, account protection methods, and social engineering countermeasures.",
+                icon: "fas fa-share-alt"
+            },
+            { 
+                title: "FACEBOOK, WHATSAPP HACKING", 
+                description: "In-depth security analysis of Facebook and WhatsApp platforms with ethical hacking methodologies.",
+                icon: "fab fa-facebook"
+            },
+            { 
+                title: "INSTAGRAM, TWITTER HACKING", 
+                description: "Security testing techniques for Instagram and Twitter platforms including vulnerability assessment.",
+                icon: "fab fa-instagram"
+            },
+            { 
+                title: "PASSWORD CRACKING METHODS", 
+                description: "Master password cracking techniques, hash analysis, and cryptographic attack methodologies.",
+                icon: "fas fa-key"
+            },
+            { 
+                title: "CARDING COMPLETE COURSE", 
+                description: "Understanding carding techniques for security professionals to protect against financial fraud.",
+                icon: "fas fa-credit-card"
+            },
+            { 
+                title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", 
+                description: "Comprehensive web application security testing and wireless network penetration training.",
+                icon: "fas fa-globe"
+            },
+            { 
+                title: "BECOME A COMPLETE EXPERT HACKER", 
+                description: "End-to-end ethical hacking training program covering all aspects of cyber security.",
+                icon: "fas fa-user-ninja"
+            },
+            { 
+                title: "COMPUTER NETWORKING FUNDAMENTALS", 
+                description: "Essential networking knowledge for security professionals including protocols and architecture.",
+                icon: "fas fa-network-wired"
+            },
+            { 
+                title: "LINUX FOR HACKING", 
+                description: "Linux command line mastery specifically tailored for penetration testing and security assessment.",
+                icon: "fab fa-linux"
+            },
+            { 
+                title: "HACKING METHODOLOGY", 
+                description: "Structured approach to ethical hacking following industry-standard methodologies and frameworks.",
+                icon: "fas fa-project-diagram"
+            },
+            { 
+                title: "APPLICATIONS HACKING", 
+                description: "Security testing of desktop and mobile applications including reverse engineering techniques.",
+                icon: "fas fa-mobile-alt"
+            },
+            { 
+                title: "WINDOWS HACKING", 
+                description: "Windows system security assessment, privilege escalation, and defense techniques.",
+                icon: "fab fa-windows"
+            },
+            { 
+                title: "WEB APPLICATIONS & WI-FI HACKING", 
+                description: "Combined training in web application security and wireless network penetration testing.",
+                icon: "fas fa-wifi"
+            },
+            { 
+                title: "ETHICAL HACKING AND PENETRATION TESTING", 
+                description: "Professional penetration testing training following ethical hacking principles and standards.",
+                icon: "fas fa-shield-alt"
+            },
+            { 
+                title: "CYBER SECURITY LAWS AND ETHICS", 
+                description: "Understanding legal frameworks, regulations, and ethical considerations in cyber security.",
+                icon: "fas fa-gavel"
+            },
+            { 
+                title: "SECURITY OPERATIONS AND MONITORING", 
+                description: "Security operations center (SOC) training including monitoring, detection, and response.",
+                icon: "fas fa-eye"
+            },
+            { 
+                title: "CASE STUDY ANALYSIS IN ETHICAL HACKING", 
+                description: "Real-world case studies analysis to understand practical application of hacking techniques.",
+                icon: "fas fa-chart-bar"
+            },
+            { 
+                title: "FINAL PROJECT & EXAM", 
+                description: "Capstone project and certification exam to validate your ethical hacking skills.",
+                icon: "fas fa-tasks"
+            }
+        ];
+
+        // Courses Data (for courses section)
+        const courses = [
+            { title: "DARK WEB, KALI LINUX, TERMUX LEARNING", icon: "fas fa-user-secret", level: "Beginner" },
+            { title: "COMPUTER HACKING, MOBILE HACKING", icon: "fas fa-laptop", level: "Intermediate" },
+            { title: "ANDROID HACKING, WIFI HACKING COURSES", icon: "fas fa-wifi", level: "Intermediate" },
+            { title: "SOCIAL MEDIA HACKING", icon: "fas fa-share-alt", level: "Intermediate" },
+            { title: "FACEBOOK, WHATSAPP HACKING", icon: "fab fa-facebook", level: "Advanced" },
+            { title: "INSTAGRAM, TWITTER HACKING", icon: "fab fa-instagram", level: "Advanced" },
+            { title: "PASSWORD CRACKING METHODS", icon: "fas fa-key", level: "Intermediate" },
+            { title: "CARDING COMPLETE COURSE", icon: "fas fa-credit-card", level: "Advanced" },
+            { title: "HACKING WEB APPLICATIONS, WIRELESS HACKING", icon: "fas fa-globe", level: "Advanced" },
+            { title: "BECOME A COMPLETE EXPERT HACKER", icon: "fas fa-graduation-cap", level: "All Levels" },
+            { title: "COMPUTER NETWORKING FUNDAMENTALS", icon: "fas fa-network-wired", level: "Beginner" },
+            { title: "LINUX FOR HACKING", icon: "fab fa-linux", level: "Beginner" },
+            { title: "HACKING METHODOLOGY", icon: "fas fa-project-diagram", level: "Intermediate" },
+            { title: "APPLICATIONS HACKING", icon: "fas fa-mobile-alt", level: "Intermediate" },
+            { title: "WINDOWS HACKING", icon: "fab fa-windows", level: "Intermediate" },
+            { title: "WEB APPLICATIONS & WI-FI HACKING", icon: "fas fa-wifi", level: "Advanced" },
+            { title: "ETHICAL HACKING AND PENETRATION TESTING", icon: "fas fa-shield-alt", level: "Advanced" },
+            { title: "CYBER SECURITY LAWS AND ETHICS", icon: "fas fa-gavel", level: "All Levels" },
+            { title: "SECURITY OPERATIONS AND MONITORING", icon: "fas fa-eye", level: "Advanced" },
+            { title: "CASE STUDY ANALYSIS IN ETHICAL HACKING", icon: "fas fa-chart-bar", level: "Advanced" },
+            { title: "FINAL PROJECT & EXAM", icon: "fas fa-tasks", level: "All Levels" }
+        ];
+
+        // Social Media Links
+        const socialLinks = [
+            { name: "YouTube", icon: "fab fa-youtube", url: "https://youtube.com/@rukiprogrammer-dg4sp?si=23nqVSzyi5vTrQGn", color: "#FF0000" },
+            { name: "Telegram", icon: "fab fa-telegram", url: "#", color: "#0088cc" },
+            { name: "Instagram", icon: "fab fa-instagram", url: "#", color: "#E4405F" },
+            { name: "Facebook", icon: "fab fa-facebook", url: "https://www.facebook.com/rukshan.shaminda.rajapaksha", color: "#1877F2" },
+            { name: "Twitter", icon: "fab fa-twitter", url: "#", color: "#1DA1F2" },
+            { name: "GitHub", icon: "fab fa-github", url: "#", color: "#ffffff" },
+            { name: "Discord", icon: "fab fa-discord", url: "#", color: "#5865F2" },
+            { name: "LinkedIn", icon: "fab fa-linkedin", url: "#", color: "#0A66C2" }
+        ];
+
+        // Generate Service Cards
+        const servicesGrid = document.querySelector('.services-grid');
+        services.forEach(service => {
+            const serviceCard = document.createElement('div');
+            serviceCard.className = 'service-card';
+            serviceCard.innerHTML = `
+                <i class="${service.icon} service-icon"></i>
+                <h3>${service.title}</h3>
+                <p>${service.description}</p>
+            `;
+            servicesGrid.appendChild(serviceCard);
+        });
+
+        // Generate Course Cards (for courses section)
+        const coursesGrid = document.querySelector('.courses-grid');
+        courses.forEach(course => {
+            const courseCard = document.createElement('div');
+            courseCard.className = 'course-card';
+            courseCard.innerHTML = `
+                <h3><i class="${course.icon} course-icon"></i> ${course.title}</h3>
+                <p>Complete course with practical examples, tools, and real-world scenarios. Step-by-step guidance for mastering this skill.</p>
+                <span class="course-level">${course.level}</span>
+            `;
+            coursesGrid.appendChild(courseCard);
+        });
+
+        // Generate Social Links
+        const socialLinksContainer = document.querySelector('.social-links');
+        const footerSocialContainer = document.querySelector('.footer-column .social-links');
+        
+        socialLinks.forEach(link => {
+            // Main social links
+            const socialLink = document.createElement('a');
+            socialLink.className = 'social-link';
+            socialLink.href = link.url;
+            socialLink.target = "_blank";
+            socialLink.innerHTML = `
+                <i class="${link.icon} social-icon" style="color: ${link.color}"></i>
+                <span>${link.name}</span>
+            `;
+            socialLinksContainer.appendChild(socialLink);
+            
+            // Footer social links (mini)
+            const footerSocialLink = document.createElement('a');
+            footerSocialLink.className = 'social-link';
+            footerSocialLink.href = link.url;
+            footerSocialLink.target = "_blank";
+            footerSocialLink.style.padding = "10px";
+            footerSocialLink.innerHTML = `<i class="${link.icon}" style="color: ${link.color}"></i>`;
+            footerSocialContainer.appendChild(footerSocialLink);
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // WhatsApp Order Form
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const country = document.getElementById('country').value;
+            const course = document.getElementById('course').value;
+            const courseText = document.getElementById('course').options[document.getElementById('course').selectedIndex].text;
+            const message = document.getElementById('message').value;
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*New  Order - Ruki Programmer*%0A%0A` +
+                                   `😎 *Name:* ${name}%0A` +
+                                   `📞 *Phone:* ${phone}%0A` +
+                                   `📠 *Email:* ${email}%0A` +
+                                   `💥 *Country:* ${country}%0A` +
+                                   `⚫ *Course:* ${courseText}%0A` +
+                                   `🖋️ *Message:* ${message || 'No additional message'}%0A%0A` +
+                                   `> Order placed via Ruki Programmer Website`;
+            
+            // WhatsApp API URL
+            const whatsappNumber = "94719320832";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            alert("Opening WhatsApp to send your order. Please complete the order process by sending the message.");
+            
+            // Reset form
+            document.getElementById('orderForm').reset();
+        });
+
+        // Stats Counter Animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize animations when page loads
+        window.addEventListener('load', function() {
+            // Animate stats
+            setTimeout(animateStats, 500);
+            
+            // Add animation classes to elements
+            const animateElements = document.querySelectorAll('.course-card, .service-card, .feature-card');
+            animateElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll('.course-card, .service-card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    </script>
+</body>
+</html>
